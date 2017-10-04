@@ -30,6 +30,7 @@ int main() {
     return 0;
 }
 
+// function that tests whether the input matches to rexp
 const char* test_regexp(string reg, string in) {
     string postfix = to_postfix(reg);
     NFA* nfa = construct_nfa(postfix);

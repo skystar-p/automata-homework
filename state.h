@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// enum for distinguish 0, 1, and empty string
 enum class Char {
     Zero,
     One,
