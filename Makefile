@@ -10,4 +10,4 @@ run:
 	./hw1
 
 clean:
-	rm hw1 *.out
+	rm -f hw1 *.out
