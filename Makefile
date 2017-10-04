@@ -4,7 +4,7 @@ TARGET = hw1
 all: build
 
 build:
-	g++ $(OBJECTS) -o $(TARGET)
+	g++ --std=c++11 $(OBJECTS) -o $(TARGET)
 
 run:
 	./hw1
