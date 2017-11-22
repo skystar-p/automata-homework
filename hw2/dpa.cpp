@@ -6,19 +6,24 @@
 
 using namespace std;
 
+// list of acceptable characters
 char chars[] = {
     'a', 'b', 'c', 'd', 'x', 'y', 'z', '2', '3', '4', '5', '6', '7'
 };
 
+// list of accepatble operators
 char opers[] = {
     '+', '-', '*', '/', '(', ')'
 };
 
+// constructor for DPA class
 DPA::DPA(State* start_, State* end_) {
     start = start_;
     end = end_;
 }
 
+// function for building dpa state transition map.
+// accept language that is provided in homework pdf
 DPA* build_dpa() {
     State* start = new State();
     State* q = new State();
@@ -102,22 +107,28 @@ DPA* build_dpa() {
 
     q_sharp->add_trans('e', '#', "#", done);
 
+    // make `done` state to be final state
     done->make_final();
 
     return new DPA(start, done);
 }
 
+// function for check if `input_str` is accepted by dpa
 bool DPA::check(string input_str) {
     vector<char> input (input_str.begin(), input_str.end());
+    // initially start with sharp
     input.push_back('#');
     unsigned int cursor = 0;
     State* curr = start;
     vector<char> stack;
 
+    // ... also the stack
     stack.push_back('#');
 
     while (true) {
         bool has_passed = false;
+
+        // iterate over transitions
         for (Transition* trans: curr->transitions) {
             bool input_match =
                 (trans->input == input[cursor]) ||
@@ -126,12 +137,15 @@ bool DPA::check(string input_str) {
                 (trans->pop == stack.back()) ||
                 (trans->pop == 'e');
 
+            // if input and stack top is matched, take the transition
             if (input_match && pop_match) {
                 if (trans->input != 'e') {
                     if (cursor < input.size()) {
                         cursor++;
                     }
                 }
+
+                // logic for recording string
                 if (trans->pop != 'e') {
                     bool is_proper_char = false;
                     for (char c: chars) {
@@ -150,8 +164,11 @@ bool DPA::check(string input_str) {
                         current_parsed += stack.back();
                     }
 
+                    // pop the stack
                     stack.pop_back();
                 }
+
+                // push the string into the stack (conversely)
                 for (int i = trans->push.size() - 1; i >= 0; i--) {
                     stack.push_back(trans->push[i]);
                 }
@@ -167,6 +184,7 @@ bool DPA::check(string input_str) {
 
                 string result = current_parsed + t;
 
+                // record the result and store
                 if (record.empty() || result != record.back()) {
                     record.push_back(result);
                 }
@@ -176,6 +194,8 @@ bool DPA::check(string input_str) {
         if (!has_passed) {
             return false;
         }
+
+        // if the state is final state, return true
         if (curr->is_final) {
             return true;
         }

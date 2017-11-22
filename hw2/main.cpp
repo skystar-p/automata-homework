@@ -25,6 +25,7 @@ int main() {
     return 0;
 }
 
+// function for print the record of dpa
 void print_record(DPA* dpa) {
     bool is_first = true;
     for (string s: dpa->record) {
