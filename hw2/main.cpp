@@ -15,11 +15,11 @@ int main() {
     cin >> input;
 
     if (dpa->check(input)) {
-        cout << "YES" << endl;
+        cout << "Yes" << endl;
         print_record(dpa);
     }
     else {
-        cout << "NO" << endl;
+        cout << "No" << endl;
     }
 
     return 0;
