@@ -4,7 +4,9 @@
 
 using namespace std;
 
+// class for state
 State::State(string name_, bool is_final_=false) {
+    // this name will be the key of hashmap
     name = name_;
     is_final = is_final_;
 }

@@ -27,11 +27,13 @@ int main(int argc, char** argv) {
     return 0;
 }
 
+// function for build turing machine
 void build_turing(string filename) {
     ifstream fin(filename);
     int state_count, transition_count;
     fin >> state_count >> transition_count;
 
+    // add states
     for (int i = 0; i < state_count; i++) {
         string name;
         int is_final;
@@ -45,6 +47,7 @@ void build_turing(string filename) {
         }
     }
 
+    // add transitions
     for (int i = 0; i < transition_count; i++) {
         string start, end;
         char read, write;
