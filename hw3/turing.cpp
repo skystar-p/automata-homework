@@ -35,7 +35,13 @@ void Turing::run() {
         tape[head] = trans->write;
         head += trans->direction;
 
-        if (trans->direction == 0) break;
+        if (trans->direction == 0) {
+            break;
+        }
+
+        if ((unsigned) head == tape.size()) {
+            tape.push_back('#');
+        }
 
         current_state = trans->end;
         current_state_name = trans->end->name;
