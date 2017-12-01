@@ -38,6 +38,11 @@ void build_turing(string filename) {
         fin >> name >> is_final;
 
         turing->add_state(new State(name, (bool)is_final));
+
+        if (i == 0) {
+            turing->current_state = turing->states[name];
+            turing->current_state_name = name;
+        }
     }
 
     for (int i = 0; i < transition_count; i++) {
